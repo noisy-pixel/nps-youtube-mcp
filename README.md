@@ -113,16 +113,37 @@ Add to your Claude Desktop configuration:
 
 ## Available Tools
 
-### Implemented (MVP)
+### Video Tools
 
 | Tool | Description | Requires API Key |
 |---|---|---|
 | `get_video_details` | Video metadata, stats, duration, tags | Yes |
 | `search_videos` | Search YouTube with filters | Yes |
 | `get_video_stats` | Quick view/like/comment counts | Yes |
+
+### Channel Tools
+
+| Tool | Description | Requires API Key |
+|---|---|---|
 | `list_channel_videos` | Recent uploads from a channel | Yes |
+| `get_channel_details` | Channel metadata, stats, branding | Yes |
+| `get_channel_stats` | Quick subscriber/video/view counts | Yes |
+| `list_channel_playlists` | Public playlists for a channel | Yes |
+
+### Transcript Tools
+
+| Tool | Description | Requires API Key |
+|---|---|---|
 | `get_transcript` | Full video transcript with optional timestamps | No |
 | `search_transcript` | Search within a transcript | No |
+
+### Playlist Tools
+
+| Tool | Description | Requires API Key |
+|---|---|---|
+| `list_playlist_items` | List all videos in a playlist | Yes |
+| `get_playlist_details` | Playlist title, description, item count | Yes |
+| `get_playlist_transcripts` | Bulk-fetch transcripts for a playlist | Yes (for listing) |
 
 ### Tool Parameters
 
@@ -146,6 +167,16 @@ Add to your Claude Desktop configuration:
 - `max_results` (number, optional) — 1-50, default 10
 - `order` (string, optional) — date, relevance, viewCount, rating
 
+#### `get_channel_details`
+- `channel_id` (string, required) — channel ID, URL, or @handle
+
+#### `get_channel_stats`
+- `channel_id` (string, required) — channel ID, URL, or @handle
+
+#### `list_channel_playlists`
+- `channel_id` (string, required) — channel ID, URL, or @handle
+- `max_results` (number, optional) — 1-50, default 10
+
 #### `get_transcript`
 - `video_id` (string, required) — video ID or URL
 - `include_timestamps` (boolean, optional) — prefix segments with `[M:SS]`
@@ -158,16 +189,18 @@ Add to your Claude Desktop configuration:
 - `context_lines` (number, optional) — surrounding segments (0-10, default 2)
 - `lang` (string, optional) — language code, default "en"
 
-### Planned (Post-MVP)
+#### `list_playlist_items`
+- `playlist_id` (string, required) — YouTube playlist ID
+- `max_results` (number, optional) — 1-50, default 20
 
-These tools are defined but not yet implemented:
+#### `get_playlist_details`
+- `playlist_id` (string, required) — YouTube playlist ID
 
-- `get_channel_details` — channel metadata
-- `list_channel_playlists` — channel playlists
-- `get_channel_stats` — subscriber/video/view counts
-- `list_playlist_items` — playlist videos
-- `get_playlist_details` — playlist metadata
-- `get_playlist_transcripts` — bulk playlist transcripts
+#### `get_playlist_transcripts`
+- `playlist_id` (string, required) — YouTube playlist ID
+- `lang` (string, optional) — language code, default "en"
+- `max_videos` (number, optional) — 1-25, default 10
+- `include_timestamps` (boolean, optional) — prefix segments with timestamps
 
 ## Supported URL Formats
 

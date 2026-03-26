@@ -156,6 +156,34 @@ export interface SearchListResponse {
   items: SearchResult[];
 }
 
+export interface ChannelSnippet {
+  title: string;
+  description: string;
+  customUrl?: string;
+  publishedAt: string;
+  thumbnails: YouTubeThumbnails;
+  country?: string;
+}
+
+export interface ChannelStatistics {
+  viewCount: string;
+  subscriberCount: string;
+  hiddenSubscriberCount: boolean;
+  videoCount: string;
+}
+
+export interface ChannelBrandingSettings {
+  channel?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    unsubscribedTrailer?: string;
+  };
+  image?: {
+    bannerExternalUrl?: string;
+  };
+}
+
 export interface ChannelContentDetails {
   relatedPlaylists: {
     uploads: string;
@@ -165,12 +193,42 @@ export interface ChannelContentDetails {
 export interface ChannelResource {
   kind: string;
   id: string;
+  snippet?: ChannelSnippet;
+  statistics?: ChannelStatistics;
+  brandingSettings?: ChannelBrandingSettings;
   contentDetails?: ChannelContentDetails;
 }
 
 export interface ChannelListResponse {
   kind: string;
+  pageInfo: YouTubePageInfo;
   items: ChannelResource[];
+}
+
+export interface PlaylistSnippet {
+  publishedAt: string;
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnails: YouTubeThumbnails;
+  channelTitle: string;
+  itemCount?: number;
+}
+
+export interface PlaylistResource {
+  kind: string;
+  id: string;
+  snippet?: PlaylistSnippet;
+  contentDetails?: {
+    itemCount: number;
+  };
+}
+
+export interface PlaylistListResponse {
+  kind: string;
+  nextPageToken?: string;
+  pageInfo: YouTubePageInfo;
+  items: PlaylistResource[];
 }
 
 export interface PlaylistItemSnippet {

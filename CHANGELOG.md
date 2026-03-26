@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.5.0-beta] - 2026-03-26
+
+### Added
+- **Channel tools**: `get_channel_details` — full channel metadata, statistics, branding, and uploads playlist
+- **Channel tools**: `get_channel_stats` — lightweight subscriber, view, and video counts
+- **Channel tools**: `list_channel_playlists` — list all public playlists for a channel
+- **Playlist tools**: `list_playlist_items` — list all videos in a playlist with metadata
+- **Playlist tools**: `get_playlist_details` — playlist title, description, channel, and item count
+- **Playlist tools**: `get_playlist_transcripts` — bulk-fetch transcripts for all videos in a playlist (up to 25)
+
+### Changed
+- All 12 tools are now fully implemented (no more stubs)
+- Added YouTube API types: `ChannelSnippet`, `ChannelStatistics`, `ChannelBrandingSettings`, `PlaylistSnippet`, `PlaylistResource`, `PlaylistListResponse`
+
 ## [0.4.3-beta] - 2026-03-26
 
 ### Added
@@ -16,9 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 - Chapter-based ad/sponsor filtering heuristic via `remove_ads` parameter
 - All common YouTube URL formats supported (watch, youtu.be, embed, shorts, bare ID)
 - Channel resolution from @handles, URLs, and direct IDs
-- Post-MVP tool stubs: `get_channel_details`, `list_channel_playlists`, `get_channel_stats`, `list_playlist_items`, `get_playlist_details`, `get_playlist_transcripts`
 
-### Technical Notes
+### Notes
 - Uses ANDROID InnerTube client (`v20.10.38`) as primary caption source — WEB client returns UNPLAYABLE for many videos as of 2026-03-26
 - Web page scraping retained as fallback method
 - See [TRANSCRIPT-INTERNALS.md](TRANSCRIPT-INTERNALS.md) for detailed technical documentation

@@ -9,7 +9,7 @@ import { registerPlaylistTools } from "./tools/playlist-tools.js";
 
 const server = new McpServer({
   name: "nps-youtube-mcp",
-  version: "0.4.3",
+  version: "0.5.0",
 });
 
 registerVideoTools(server);
