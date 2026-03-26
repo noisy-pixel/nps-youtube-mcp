@@ -1,0 +1,56 @@
+{
+  "name": "nps-youtube-mcp",
+  "version": "0.4.3-beta",
+  "description": "MCP server for YouTube Data API and transcript retrieval",
+  "author": "Noisy Pixel Studios",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "nps-youtube-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "TRANSCRIPT-INTERNALS.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noisy-pixel/nps-youtube-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/noisy-pixel/nps-youtube-mcp/issues"
+  },
+  "homepage": "https://github.com/noisy-pixel/nps-youtube-mcp#readme",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "youtube",
+    "transcript",
+    "youtube-api",
+    "claude",
+    "ai",
+    "llm"
+  ],
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
