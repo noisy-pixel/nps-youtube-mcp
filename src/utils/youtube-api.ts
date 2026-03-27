@@ -1,22 +1,13 @@
-const YOUTUBE_API_BASE = "https://www.googleapis.com/youtube/v3";
+import { requireApiKey } from "./config.js";
 
-function getApiKey(): string {
-  const key = process.env.YOUTUBE_API_KEY;
-  if (!key) {
-    throw new Error(
-      "YOUTUBE_API_KEY environment variable is not set. " +
-        "Get a key from https://console.cloud.google.com/ with YouTube Data API v3 enabled."
-    );
-  }
-  return key;
-}
+const YOUTUBE_API_BASE = "https://www.googleapis.com/youtube/v3";
 
 export async function youtubeApiFetch<T>(
   endpoint: string,
   params: Record<string, string>
 ): Promise<T> {
   const url = new URL(`${YOUTUBE_API_BASE}/${endpoint}`);
-  url.searchParams.set("key", getApiKey());
+  url.searchParams.set("key", requireApiKey());
   for (const [key, value] of Object.entries(params)) {
     url.searchParams.set(key, value);
   }

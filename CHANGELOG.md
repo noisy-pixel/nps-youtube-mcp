@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.5.1-beta] - 2026-03-27
+
+### Added
+- **Setup command**: `nps-youtube-mcp setup` — one-time CLI command to configure the YouTube API key, stored in `~/.nps-youtube-mcp/config.json`
+- **Config file fallback**: Server now resolves the API key from environment variable first, then user-level config file, with a descriptive error if neither is found
+- **`.env` detection**: Setup command automatically reads `YOUTUBE_API_KEY` from a `.env` file in the current directory if present
+- **`.env.example`**: Template file for API key configuration
+
+### Changed
+- API key is no longer required in MCP client configs — setup handles it once per machine
+- Simplified README installation and configuration instructions
+- MCP client config examples now use `nps-youtube-mcp` as the server name (instead of generic `youtube`)
+
 ## [0.5.0-beta] - 2026-03-26
 
 ### Added

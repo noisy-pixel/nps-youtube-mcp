@@ -7,9 +7,18 @@ import { registerTranscriptTools } from "./tools/transcript-tools.js";
 import { registerChannelTools } from "./tools/channel-tools.js";
 import { registerPlaylistTools } from "./tools/playlist-tools.js";
 
+// Route CLI subcommands before starting the MCP server
+const subcommand = process.argv[2];
+
+if (subcommand === "setup") {
+  const { runSetup } = await import("./setup.js");
+  await runSetup(process.argv.slice(3));
+  process.exit(0);
+}
+
 const server = new McpServer({
   name: "nps-youtube-mcp",
-  version: "0.5.0",
+  version: "0.5.1",
 });
 
 registerVideoTools(server);

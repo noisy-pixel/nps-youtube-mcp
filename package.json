@@ -1,6 +1,6 @@
 {
   "name": "nps-youtube-mcp",
-  "version": "0.5.0-beta",
+  "version": "0.5.1-beta",
   "description": "MCP server for YouTube Data API and transcript retrieval",
   "author": "Noisy Pixel Studios",
   "license": "MIT",

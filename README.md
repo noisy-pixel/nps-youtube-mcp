@@ -28,88 +28,125 @@ Built by **Noisy Pixel Studios**.
 3. Enable the **YouTube Data API v3**
 4. Go to **Credentials** → **Create Credentials** → **API key**
 
-## Installation
+## Installation & Setup
 
-### From source (clone + global install)
+### 1. Install
 
 ```bash
 git clone https://github.com/noisy-pixel/nps-youtube-mcp.git
 cd nps-youtube-mcp
-npm install
-npm run build
+npm install && npm run build
 npm install -g .
 ```
 
 After this, `nps-youtube-mcp` is available as a command globally.
 
-### Local development
+### 2. Configure your API key
+
+The server needs a YouTube Data API v3 key for video/search/channel tools. Transcript tools work without one.
+
+**Option A: Run setup (recommended)**
 
 ```bash
-git clone https://github.com/noisy-pixel/nps-youtube-mcp.git
-cd nps-youtube-mcp
-npm install
-npm run build
+nps-youtube-mcp setup
 ```
 
-## Configuration
+This will prompt you for your API key and save it to `~/.nps-youtube-mcp/config.json`. You only need to do this once per machine — all MCP clients will pick it up automatically.
 
-### Environment Variables
+If you have a `.env` file with `YOUTUBE_API_KEY` in the current directory, setup will detect and use it:
 
-| Variable | Required | Description |
-|---|---|---|
-| `YOUTUBE_API_KEY` | Yes (for API tools) | Google API key with YouTube Data API v3 enabled |
-
-Transcript tools (`get_transcript`, `search_transcript`) do **not** require an API key.
-
-### Claude Code
-
-Add to your project's `.mcp.json` or VS Code `.vscode/mcp.json`:
-
-```json
-{
-  "servers": {
-    "youtube": {
-      "command": "nps-youtube-mcp",
-      "env": {
-        "YOUTUBE_API_KEY": "your-api-key-here"
-      }
-    }
-  }
-}
+```bash
+# Create .env from the template (optional)
+cp .env.example .env
+# Edit .env and add your key, then:
+nps-youtube-mcp setup
 ```
 
-If installed locally (not globally), use the full path instead:
+You can also pass the key directly:
 
-```json
-{
-  "servers": {
-    "youtube": {
-      "command": "node",
-      "args": ["/path/to/nps-youtube-mcp/dist/index.js"],
-      "env": {
-        "YOUTUBE_API_KEY": "your-api-key-here"
-      }
-    }
-  }
-}
+```bash
+nps-youtube-mcp setup --key YOUR_API_KEY
 ```
 
-### Claude Desktop
+**Option B: Environment variable**
 
-Add to your Claude Desktop configuration:
+Set `YOUTUBE_API_KEY` in your system environment. This takes priority over the config file.
+
+```bash
+# Linux/macOS — add to your shell profile (~/.bashrc, ~/.zshrc)
+export YOUTUBE_API_KEY=your_api_key_here
+
+# Windows — set via System Environment Variables, or:
+setx YOUTUBE_API_KEY "your_api_key_here"
+```
+
+### 3. Add to your MCP client
+
+The server uses the API key from setup automatically, so you don't need to pass it in the client config. Just point the client at the server command:
+
+**Claude Code** (`.mcp.json`):
 
 ```json
 {
   "mcpServers": {
-    "youtube": {
-      "command": "nps-youtube-mcp",
-      "env": {
-        "YOUTUBE_API_KEY": "your-api-key-here"
-      }
+    "nps-youtube-mcp": {
+      "command": "nps-youtube-mcp"
     }
   }
 }
 ```
+
+**VS Code** (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "nps-youtube-mcp": {
+      "command": "nps-youtube-mcp"
+    }
+  }
+}
+```
+
+**Claude Desktop:**
+
+```json
+{
+  "mcpServers": {
+    "nps-youtube-mcp": {
+      "command": "nps-youtube-mcp"
+    }
+  }
+}
+```
+
+**If installed locally** (not globally), use the full path to `dist/index.js`:
+
+```json
+{
+  "command": "node",
+  "args": ["/path/to/nps-youtube-mcp/dist/index.js"]
+}
+```
+
+You can also pass the key via the client's `env` config if you prefer — it takes priority over the config file:
+
+```json
+{
+  "env": {
+    "YOUTUBE_API_KEY": "your-api-key-here"
+  }
+}
+```
+
+### API Key Lookup Order
+
+The server resolves the API key in this order:
+
+1. **`YOUTUBE_API_KEY` environment variable** — set by MCP client config or system
+2. **`~/.nps-youtube-mcp/config.json`** — created by `nps-youtube-mcp setup`
+
+Transcript tools (`get_transcript`, `search_transcript`) do **not** require an API key.
 
 ## Available Tools
 
